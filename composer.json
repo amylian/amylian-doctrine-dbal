@@ -17,7 +17,7 @@
 		}
 	],
 	"require" : {
-		"doctrine/dbal" : "doctrine/dbal@stable",
+		"doctrine/dbal" : "*@stable",
 		"amylian/amylian-doctrine-common" : "dev-master"
 	},
 	"require-dev" : {
