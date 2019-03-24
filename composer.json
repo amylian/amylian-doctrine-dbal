@@ -1,0 +1,36 @@
+{
+	"name" : "amylian/amylian-doctrine-dbal",
+	"description" : "ATTENTION EXPERIMENTAL! DBAL Classes for Doctrine",
+	"type" : "yii2-extension",
+	"minimum-stability" : "dev",
+	"prefer-stable" : true,
+	"authors" : [{
+			"name" : "Andreas Prucha (Abexto - Helicon Software Development - Andreas Prucha / Amylian Project)",
+			"email" : "andreas.prucha@gmail.com",
+			"homepage" : "http://www.abexto.com",
+			"role" : "Developer"
+		}
+	],
+	"repositories" : [{
+			"type" : "composer",
+			"url" : "https://asset-packagist.org"
+		}
+	],
+	"require" : {
+		"doctrine/dbal" : "doctrine/dbal@stable"
+		"amylian/amylian-doctrine-common" : "dev-master"
+	},
+	"require-dev" : {
+		"phpunit/phpunit" : "*"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"Amylian\\Doctrine\\DBAL" : "src/"
+		}
+	},
+	"autoload-dev" : {
+		"psr-4" : {
+			"Amylian\\Doctrine\\DBAL\\tests" : "tests/"
+		}
+	},
+}
