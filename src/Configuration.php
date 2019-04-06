@@ -15,6 +15,6 @@ namespace Amylian\Doctrine\DBAL;
  */
 class Configuration extends \Doctrine\DBAL\Configuration implements ConfigurationInterface
 {
-    use Amylian\Utils\ṔropertyTrait;
+    use \Amylian\Utils\ṔropertyTrait;
     use ConfigurationTrait;
 }

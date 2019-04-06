@@ -14,12 +14,4 @@ namespace Amylian\Doctrine\DBAL;
  */
 trait ConfigurationTrait
 {
-
-    public function getDefaultConfigurationArray(): array
-    {
-        return [
-            'resultCacheImpl' => \yii\di\Instance::of(Consts::DEFAULT_CACHE)
-        ];
-    }
-
 }

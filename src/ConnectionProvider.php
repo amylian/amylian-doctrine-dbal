@@ -20,7 +20,7 @@ class ConnectionProvider implements ConnectionProviderInterface
     /**
      * @var ConfigurationInterface 
      */
-    protected $configuraiton = null;
+    protected $configuration = null;
     
     /**
      * @var \Doctrine\DBAL\Connection
@@ -31,29 +31,35 @@ class ConnectionProvider implements ConnectionProviderInterface
      * @var array connection parameters passed to 
      * {@see \Doctrine\DBAL\DriverManager::getConnection()}
      */
-    protected $connectionParams = [];
+    protected $params = [];
     
-    public function __construct(ConfigurationInterface $configuration)
+    /**
+     * @var \Amylian\Doctrine\Common\EventManager|\Amylian\Doctrine\Common\EventManagerInterface Used Event Manager
+     */
+    protected $eventManager = null;
+    
+    public function __construct(ConfigurationInterface $configuration, \Amylian\Doctrine\Common\EventManagerInterface $eventManager)
     {
         $this->configuration = $configuration;
+        $this->eventManager = $eventManager;
     }
     
     /**
      * Returns the configured connection parameters
      * @return array
      */
-    public function getConnectionParams(): array
+    public function getParams(): Array
     {
-        return $this->connectionParams;
+        return $this->params;
     }
     
     /**
      * Sets the connection parameters
      * @return array
      */
-    public function setConnectionParams(Array $params)
+    public function setParams(Array $params)
     {
-        $this->connectionParams = $params;
+        $this->params = $params;
     }
     
     /**
@@ -66,25 +72,44 @@ class ConnectionProvider implements ConnectionProviderInterface
      */
     protected function createActualConnection(): \Doctrine\DBAL\Connection
     {
-        return \Doctrine\DBAL\DriverManager::getConnection($this->getConnectionParams(), 
-                $this->getConfiguration, $eventManager);
+        return \Doctrine\DBAL\DriverManager::getConnection($this->getParams(), 
+                $this->getConfiguration(), $this->getEventManager());
     }
     
     public function getActualConnection(): \Doctrine\DBAL\Connection
     {
-        if (!$this->$actualConnection) {
-            $this->$actualConnection = $this->createActualConnection();
+        if (!$this->actualConnection) {
+            $this->actualConnection = $this->createActualConnection();
         }
+        return $this->actualConnection;
     }
     
     public function getConfiguration(): ConfigurationInterface
     {
-        return $this->configuraiton;
+        return $this->configuration;
     }
     
     public function setConfiguration($configuration)
     {
         $this->configuration = $configuration;
+    }
+    
+    /**
+     * Returns the EventManager
+     * @return \Amylian\Doctrine\Common\EventManagerInterface|EventManager
+     */
+    public function getEventManager(): \Amylian\Doctrine\Common\EventManagerInterface
+    {
+        return $this->eventManager;
+    }
+    
+    /**
+     * Sets the EventManager instance
+     * @param \Amylian\Doctrine\Common\EventManagerInterface $eventManager
+     */
+    public function setEventManager(\Amylian\Doctrine\Common\EventManagerInterface $eventManager)
+    {
+        $this->eventManager = $eventManager;
     }
 
 }
